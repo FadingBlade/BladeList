@@ -1,114 +1,58 @@
 # BladeList
-
-Terminal to-do manager. No cloud. No accounts. Just tasks.
-
-```
-todo add "finish the report" --high --due 2026-05-01 --tag work
-todo list
-todo done 1
-todo stats
-```
-
----
-
+Local terminal to-do list.
 ## Install
-
-**Windows — PowerShell**
-```powershell
-irm https://raw.githubusercontent.com/FadingBlade/BladeList/main/install.ps1 | iex
-```
-
-**Linux / macOS**
+**Linux / macOS:**
 ```sh
 curl -fsSL https://raw.githubusercontent.com/FadingBlade/BladeList/main/install.sh | sh
 ```
-
-Requires **Python 3.7+**. The installer will offer to install Python automatically if it's missing.
+**Windows PowerShell:**
+```powershell
+irm https://raw.githubusercontent.com/FadingBlade/BladeList/main/install.ps1 | iex
+```
+The installer detects your OS and installs Python if needed and adds the `todo` command to your PATH.
 
 ---
 
 ## Commands
-
-| Command | Shortcut | Description |
-|---|---|---|
-| `todo add <text>` | `todo a` | Add a task |
-| `todo list` | `todo ls` | List all tasks |
-| `todo list --pending` | | Show only undone |
-| `todo list --done` | | Show only completed |
-| `todo list --tag <tag>` | | Filter by tag |
-| `todo list --due` | | Sort by due date |
-| `todo done <id>` | `todo d` | Mark task complete |
-| `todo undone <id>` | | Reopen a task |
-| `todo edit <id> <text>` | | Edit task text |
-| `todo priority <id> high\|med\|low` | | Change priority |
-| `todo tag <id> <tag>` | | Add a tag |
-| `todo due <id> <YYYY-MM-DD\|clear>` | | Set or clear due date |
-| `todo remove <id>` | `todo rm` | Delete a task |
-| `todo search <keyword>` | `todo s` | Search tasks + tags |
-| `todo clear --done` | | Remove all completed |
-| `todo clear --all` | | Remove everything |
-| `todo stats` | | Summary statistics |
-| `todo export [<file>]` | | Dump tasks to .txt |
-| `todo update` | | Update to latest version |
-| `todo uninstall` | | Remove BladeList |
-| `todo help` | | Show help |
-
-## Flags for `add`
-
-| Flag | Description |
-|---|---|
-| `--high` / `--med` / `--low` | Priority (default: `med`) |
-| `--due YYYY-MM-DD` | Set a due date |
-| `--tag <tag>` | Add a tag (repeat for multiple) |
-
-## Priority colors
-
-| Priority | Color |
-|---|---|
-| `HIGH` | Red |
-| `MED` | Yellow |
-| `LOW` | Green |
-
----
-
-## Examples
-
-```sh
-# Add tasks
-todo add "buy milk" --low
-todo add "finish report" --high --due 2026-05-01 --tag work
-todo add "call dentist" --med --due 2026-04-30 --tag personal --tag health
-
-# View tasks
-todo list
-todo list --pending --tag work
-todo list --due
-
-# Manage tasks
-todo done 2
-todo edit 1 "buy oat milk"
-todo priority 3 high
-todo tag 3 urgent
-todo due 3 2026-06-01
-todo due 3 clear
-
-# Bulk & stats
-todo stats
-todo search dentist
-todo export ~/my-tasks.txt
-todo clear --done
-
-# Maintenance
-todo update
-todo uninstall
+```
+todo add <text>                    add a task
+todo add <text> --high             add a high priority task
+todo add <text> --due YYYY-MM-DD   add a task with a due date
+todo add <text> --tag <tag>        add a task with a tag
+todo list                          list all tasks
+todo list --pending                show only undone tasks
+todo list --done                   show only completed tasks
+todo list --tag <tag>              filter by tag
+todo list --due                    sort by due date
+todo done <id>                     mark a task complete
+todo undone <id>                   reopen a task
+todo edit <id> <text>              edit task text
+todo priority <id> <high|med|low>  change priority
+todo tag <id> <tag>                add a tag to a task
+todo due <id> <YYYY-MM-DD|clear>   set or clear a due date
+todo remove <id>                   delete a task
+todo search <keyword>              search tasks and tags
+todo clear --done                  remove all completed tasks
+todo clear --all                   remove everything
+todo stats                         show summary stats
+todo export [<file>]               dump tasks to a .txt file
+todo update                        update to the latest version
+todo uninstall                     remove BladeList
+todo help                          show all commands
+todo                               show all commands
 ```
 
 ---
 
-## Data
-
-Tasks are stored at `~/.bladelist/todos.json` — plain JSON, yours forever.
+## Requirements
+- Python 3.7+ (installer handles this)
+- Works fully offline — no internet needed after install
 
 ---
 
-Made by FadingBlade · [BladeChat](https://github.com/FadingBlade/BladeChat)
+## Uninstall
+**Linux / macOS:** `rm ~/.local/bin/todo ~/.local/bin/BladeList.py`
+
+**Windows:** Delete `%USERPROFILE%\.BladeList` and remove it from PATH in System Settings.
+
+(Or just run `todo uninstall`)
